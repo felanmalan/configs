@@ -34,6 +34,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# Starts picom
+exec --no-startup-id picom --config ~/.config/picom.conf -b
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
@@ -62,7 +65,7 @@ mode "exit: [b]etterlockscreen [l]ogout, [r]eboot, [s]hutdown" {
 
   bindsym s exec sudo systemctl poweroff
 
-  bindsym Escape mode "default"
+  bindsym Escape mode "default"r
 
   bindsym Return mode "default"
 
@@ -226,11 +229,11 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $bg-color            #1f1f44
-set $inactive-bg-color   #2f2f34
-set $text-color          #f3f4f5
-set $inactive-text-color #5f5f5f
-set $urgent-bg-color     #3f3f3f
+set $bg-color            #ffffff
+set $inactive-bg-color   #f0f0f0
+set $text-color          #131313
+set $inactive-text-color #3f3f3f
+set $urgent-bg-color     #2f2f2f
 
 # window colors
 #                       border              background         text                 indicator
@@ -244,26 +247,31 @@ hide_edge_borders both
 for_window [class=".*"] border pixel 1
 
 
-#gaps inner 2
-#gaps outer 1
+gaps inner 2
+gaps outer 1
 #smart_gaps on
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
-        #status_command i3blocks
+	position top
+	status_command i3status
+	height 13	
+	#mode hide
         colors {
-	      background $bg-color
-        separator #757575
+	     	background $bg-color
+		statusline #000000
+       		separator #757575
 		#                  border             background         text
 		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $bg-color          $bg-color          $inactive-text-color
+		inactive_workspace $bg-color          $bg-color          $text-color
 		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
 	}
+
 }
 
-#exec_always --no-startup-id /home/gabriel/.config/polybar/launch.sh
+
+#exec_always --no-startup-id /home/rosenberg/.config/polybar/launch.sh
 
 # Binds key (locks screen)
 bindsym $mod+shift+a exec --no-startup-id betterlockscreen -l
@@ -273,6 +281,28 @@ exec kitty
 exec blueberry-tray
 #exec firefox
 
+# Plasma compatibility improvements
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [title="Desktop @ QRect.*"] kill; floating enable; border none
+for_window [class="yakuake"] floating enable
+for_window [class="systemsettings"] floating enable
+for_window [class="plasmashell"] floating enable;
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [class="(?i)*nextcloud*"] floating disable
+for_window [class="plasmashell" window_type="notification"] border none, move position 70 ppt 81 ppt
+no_focus [class="plasmashell" window_type="notification"]
+
+# using plasma's logout screen instead of i3's
+bindsym $mod+Shift+e exec --no-startup-id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
+
+
 bindsym $mod+shift+w exec firefox
 
 # moves applications to ws
@@ -280,6 +310,7 @@ for_window [class="firefox"] move to workspace $ws3
 for_window [class="discord"] move to workspace $ws4
 
 #Battery
+exec_always --no-startup-id autotiling
 exec --no-startup-id sudo tlp bat 
 exec --no-startup-id sudo powertop --auto-tune
 exec --no-startup-id xss-lock -- i3lock -n -i background_image.png &
