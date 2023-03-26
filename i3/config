@@ -271,7 +271,7 @@ bar {
 }
 
 
-#exec_always --no-startup-id /home/rosenberg/.config/polybar/launch.sh
+#exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # Binds key (locks screen)
 bindsym $mod+shift+a exec --no-startup-id betterlockscreen -l
