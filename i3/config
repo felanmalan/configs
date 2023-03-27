@@ -71,9 +71,9 @@ mode "exit: [b]etterlockscreen [l]ogout, [r]eboot, [s]hutdown" {
 
 }
 
-bindsym $mod+x mode "exit: [b]etterlockscreen [l]ogout, [r]eboot, [s]hutdown"
+#bindsym $mod+x mode "exit: [b]etterlockscreen [l]ogout, [r]eboot, [s]hutdown"
 
-
+bindsym $mod+shift+e exec ~/.config/polybar/shapes/scripts/powermenu.sh
 
 # start a terminal
 bindsym $mod+Return exec kitty
@@ -83,7 +83,7 @@ bindsym $mod+Shift+Return exec kitty ranger
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id rofi -show drun 
+bindsym $mod+d exec ~/.config/polybar/shapes/scripts/launcher.sh 
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -297,10 +297,6 @@ for_window [class="Plasmoidviewer"] floating enable; border none
 for_window [class="(?i)*nextcloud*"] floating disable
 for_window [class="plasmashell" window_type="notification"] border none, move position 70 ppt 81 ppt
 no_focus [class="plasmashell" window_type="notification"]
-
-# using plasma's logout screen instead of i3's
-bindsym $mod+Shift+e exec --no-startup-id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
-
 
 bindsym $mod+shift+w exec firefox
 
