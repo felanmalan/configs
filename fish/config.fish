@@ -53,8 +53,8 @@ set -U fish_user_paths $HOME/.bin $HOME/.local/bin $HOME/Applications $fish_user
 #end
 
 # sets tools
-set -x EDITOR vim
-set -x VISUAL vim
+set -x EDITOR nvim
+set -x VISUAL nvim
 #set -x TERM alacritty
 # Sets the terminal type for proper colors
 set TERM "xterm-256color"
@@ -205,6 +205,10 @@ alias sprs='sudo pacman -Rs'
 alias sprdd='sudo pacman -Rdd'
 alias spqo='sudo pacman -Qo'
 alias spsii='sudo pacman -Sii'
+
+#vim/nvim
+alias vim=nvim
+alias nv=nvim
 
 #bat
 alias cat='bat'

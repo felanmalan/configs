@@ -210,10 +210,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym odiaeresis resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 20 px or 10 ppt
+        bindsym j resize grow height 20 px or 10 ppt
+        bindsym k resize shrink height 20 px or 10 ppt
+        bindsym l resize grow width 20 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 5 px or 5 ppt
@@ -244,7 +244,7 @@ set $urgent-bg-color     #2f2f2f
 
 
 hide_edge_borders both
-for_window [class=".*"] border pixel 1
+for_window [class=".*"] border pixel 0
 
 
 gaps inner 2
@@ -252,8 +252,7 @@ gaps outer 1
 #smart_gaps on
 
 # Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
+# finds out, if available) #bar {
 #	position top
 #	status_command i3status
 #	height 13	
@@ -296,6 +295,9 @@ for_window [class="Klipper"] floating enable; border none
 for_window [class="Plasmoidviewer"] floating enable; border none
 for_window [class="(?i)*nextcloud*"] floating disable
 for_window [class="plasmashell" window_type="notification"] border none, move position 70 ppt 81 ppt
+for_window [title="Steam - News"] floating enable
+for_window [title="Friends List"] floating enable
+for_window [class="calibre-ebook-viewer"] floating enable
 no_focus [class="plasmashell" window_type="notification"]
 
 bindsym $mod+shift+w exec firefox
@@ -313,3 +315,5 @@ exec --no-startup-id xss-lock -- i3lock -n -i background_image.png &
 
 #Wallpaper
 exec_always --no-startup-id feh --randomize --bg-scale ~/images/*
+
+#Session keyring unlock (hopefully)
