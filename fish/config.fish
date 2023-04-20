@@ -47,11 +47,6 @@ end
 set -e fish_user_paths
 set -U fish_user_paths $HOME/.bin $HOME/.local/bin $HOME/Applications $fish_user_paths
 
-# Starship prompt
-#if command -sq starship
-#    starship init fish | source
-#end
-
 # sets tools
 set -x EDITOR nvim
 set -x VISUAL nvim
@@ -529,6 +524,11 @@ function personal
     cp -rf /personal/.* ~
 end
 
+function stui
+    spotifyd
+    spt
+end
+
 # git
 # using plugin
 # omf install https://github.com/jhillyerd/plugin-git
@@ -581,8 +581,3 @@ set fish_pager_color_prefix normal --bold underline
 set fish_pager_color_prefix white --bold --underline
 set fish_pager_color_progress brwhite --background=cyan
 set fish_color_search_match --background="#60AEFF"
-
-
-# I love starship
-# Not anymore
-#starship init fish | source
