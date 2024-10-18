@@ -16,8 +16,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.kernelModules = [ "amdgpu" ];
-
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -32,9 +30,6 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
-
-  # Vulkan
-  hardware.opengl.driSupport32Bit = true; # For 32 bit apps
 
 
   # Set your time zone.
@@ -85,7 +80,6 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
-
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
@@ -95,8 +89,6 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
-  services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -125,10 +117,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
-  ### This is test, if shit goes wrong try disabling this
-  ### IS STUFF GOES SILLI THIS MAY BE THE SILLI SOURCE
-  nixpkgs.config.allowUnsupportedSystem = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -163,22 +151,10 @@
     blueberry
     psensor
     brave
-    bat
-    blockbench
-    audacity
-    modrinth-app
-    protonup-ng
-    krita
-    flatpak
-    heroic
-    betterdiscord-installer
-    betterdiscordctl
-    discord
     bottles
-    p7zip
-    unrar
-    git-credential-manager
-    kdePackages.kwallet
+    protonup
+    pulsar
+    flatpak
   ];
   
   fonts.packages = with pkgs; [
@@ -193,6 +169,10 @@
     proggyfonts
     nerdfonts
   ]; 
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "pulsar-1.117.0"
+  ];
 
 
   # Some programs need SUID wrappers, can be configured further or are
